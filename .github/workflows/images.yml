@@ -1,0 +1,54 @@
+name: images
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  images:
+    runs-on: ubuntu-latest
+    container:
+      image: debian:buster
+      options: --privileged --net=host -v /dev:/dev
+
+    strategy:
+      matrix:
+        arch: ["armhf", "arm64", "amd64"]
+        version: ["stretch", "buster"]
+
+    steps:
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            dosfstools \
+            e2fsprogs \
+            util-linux \
+            parted \
+            qemu-utils \
+            python3-click \
+            mmdebstrap
+
+      # The script needs additional dependencies when it's targeting an
+      # architecture different than i386 or amd64.
+      - name: Install dependencies (no i386 or amd64 target)
+        if: ${{ matrix.arch != 'amd64' }}
+        run: apt-get install -y binfmt-support qemu-user-static
+
+      - name: Create the Debian disk image
+        run: |
+          python3 make-debian-qemu-disk-image.py \
+            --arch arm64 \
+            --version buster \
+            --variant essential \
+            --disk-size 10240 \
+            --swap-size 512 \
+            --image-format qcow2 \
+            my-disk.qcow2
+
+      - name: Upload the Debian disk image
+        uses: actions/upload-artifact@v2
+        with:
+          name: debian-${{ matrix.version }}-${{ matrix.arch }}-disk
+          path: my-disk.qcow2
+          retention-days: 1
