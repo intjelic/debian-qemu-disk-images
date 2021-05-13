@@ -42,7 +42,7 @@ jobs:
           python3 make-debian-qemu-disk-image.py \
             --arch ${{ matrix.arch }} \
             --version ${{ matrix.version }} \
-            --variant essential \
+            --variant standard \
             --disk-size 10240 \
             --swap-size 512 \
             --image-format qcow2 \
