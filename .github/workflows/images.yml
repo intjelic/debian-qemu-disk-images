@@ -17,6 +17,8 @@ jobs:
         version: ["buster"] # "stretch"
 
     steps:
+      - uses: actions/checkout@v2
+
       - name: Install dependencies
         run: |
           apt-get update
