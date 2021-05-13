@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: debian:buster
-      options: --privileged --net=host -v /dev:/dev
+      options: --privileged -v /dev:/dev
 
     strategy:
       matrix:
