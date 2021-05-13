@@ -40,8 +40,8 @@ jobs:
       - name: Create the Debian disk image
         run: |
           python3 make-debian-qemu-disk-image.py \
-            --arch arm64 \
-            --version buster \
+            --arch ${{ matrix.arch }} \
+            --version ${{ matrix.version }} \
             --variant essential \
             --disk-size 10240 \
             --swap-size 512 \
