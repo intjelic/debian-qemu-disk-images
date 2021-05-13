@@ -47,7 +47,7 @@ jobs:
             --swap-size 512 \
             --image-format qcow2 \
             --no-confirm \
-            my-disk.qcow2
+          my-disk.qcow2
 
       - name: Upload the Debian disk image
         uses: actions/upload-artifact@v2
