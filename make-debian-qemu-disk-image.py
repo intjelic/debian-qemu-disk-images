@@ -351,7 +351,7 @@ def configure_network_interfaces(mount_dir):
 @click.option('--image-format',  default='raw',      help='The format of the disk image (by default raw, but can be any of QEMU\'s supported formats)')
 @click.option('--root-password', default='root',     help='The password of the root system user, by default it\'s \'root\'')
 @click.option('--hostname',      default=None,       help='The hostname (by default it\'s the name of the Debian version)')
-@click.option('--no-confirm',    default=False,      help='To be written')
+@click.option('--no-confirm',    is_flag=True,       help='To be written')
 @click.argument('output')
 def script(arch, version, variant, packages, mirror, disk_size, swap_size, image_format, root_password, hostname, no_confirm, output):
     """ Brief description.
