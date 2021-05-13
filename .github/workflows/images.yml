@@ -46,6 +46,7 @@ jobs:
             --disk-size 10240 \
             --swap-size 512 \
             --image-format qcow2 \
+            --no-confirm \
             my-disk.qcow2
 
       - name: Upload the Debian disk image
