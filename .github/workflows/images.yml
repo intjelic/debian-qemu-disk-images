@@ -13,8 +13,8 @@ jobs:
 
     strategy:
       matrix:
-        arch: ["armhf", "arm64", "amd64"]
-        version: ["stretch", "buster"]
+        arch: ["amd64"] # "armhf", "arm64"
+        version: ["buster"] # "stretch"
 
     steps:
       - name: Install dependencies
